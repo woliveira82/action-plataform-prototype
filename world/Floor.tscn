@@ -1,95 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://world/Floor.tres" type="TileSet" id=1]
 [ext_resource path="res://units/BaseUnit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/knight_14.png" type="Texture" id=3]
 [ext_resource path="res://world/Floor.gd" type="Script" id=4]
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 352, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
-region = Rect2( 32, 352, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 224, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
-region = Rect2( 32, 224, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 64, 224, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 96, 224, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 224, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 3 )
-region = Rect2( 32, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
-region = Rect2( 64, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 3 )
-region = Rect2( 96, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 96, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=16]
-resource_local_to_scene = true
-animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 0.5
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "attacking",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "walking",
-"speed": 4.0
-} ]
-
-[sub_resource type="SpriteFrames" id=17]
-resource_local_to_scene = true
-animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 0.5
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "attacking",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "walking",
-"speed": 4.0
-} ]
 
 [node name="Floor" type="Node2D"]
 script = ExtResource( 4 )
@@ -106,9 +19,6 @@ tile_data = PoolIntArray( 458750, 2, 0, 458751, 2, 0, 393236, 2, 0, 393237, 2, 0
 [node name="BasicUnit" parent="Units" instance=ExtResource( 2 )]
 position = Vector2( 75, 149 )
 
-[node name="AnimatedSprite" parent="Units/BasicUnit" index="0"]
-frames = SubResource( 16 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="BasicUnit" parent="Enemies" instance=ExtResource( 2 )]
@@ -116,13 +26,10 @@ position = Vector2( 250, 149 )
 collision_layer = 8
 collision_mask = 5
 
-[node name="AnimatedSprite" parent="Enemies/BasicUnit" index="0"]
-frames = SubResource( 17 )
-
-[node name="RayCastRight" parent="Enemies/BasicUnit" index="3"]
+[node name="RayCastRight" parent="Enemies/BasicUnit" index="4"]
 collision_mask = 4
 
-[node name="RayCastLeft" parent="Enemies/BasicUnit" index="4"]
+[node name="RayCastLeft" parent="Enemies/BasicUnit" index="5"]
 collision_mask = 4
 
 [node name="ObjectiveA" type="Node2D" parent="."]

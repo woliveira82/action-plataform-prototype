@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var Sprite = $AnimatedSprite
+onready var AnimationPlayer = $AnimationPlayer
 onready var Timer = $Timer
 
 var velocity = Vector2.ZERO
@@ -20,37 +20,40 @@ var _enemy = null
 
 func _ready():
 	position.y = 150
+	$HiiboxPivot/Hitbox/CollisionShape2D.disabled = true
 
 
 func _physics_process(delta):
 	match state:
 		IDLE:
 			velocity.x = 0
-			Sprite.animation = 'idle'
-			
+			AnimationPlayer.play("idle")
+
 		WALKING:
-			Sprite.animation = 'walking'
-			velocity.x = walking_speed
 			face_right = _set_face_right(_objective)
 			if face_right:
-				Sprite.flip_h = false
+				AnimationPlayer.play("walk_right")
 				velocity.x = walking_speed
 			else:
-				Sprite.flip_h = true
+				AnimationPlayer.play("walk_left")
 				velocity.x = -walking_speed
+				
 			if _is_near(_objective):
 				_set_idle()
-			
+
 		FIGHTING:
-			face_right = _set_face_right(_enemy)
-			Sprite.animation = 'attacking'
 			velocity.x = 0
+			face_right = _set_face_right(_enemy)
+			if face_right:
+				AnimationPlayer.play("attack_right")
+			else:
+				AnimationPlayer.play("attack_left")
 
 		FOLLOWING:
 			# se distancia maior que x
 			# walk towrd
 			pass
-	
+
 	move_and_slide(velocity * delta)
 
 
