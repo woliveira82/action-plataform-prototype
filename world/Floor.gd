@@ -8,13 +8,10 @@ onready var Player = $Player
 func _ready():
 	randomize()
 	for unit in unit_list:
-		unit.set_walking()
+		unit.set_objective($ObjectiveB)
 	
 	for enemy in enemy_list:
-		enemy.set_walking()
-		enemy.face_right = false
-		enemy.collision_layer = 4
-		enemy.collision_mask = 3
+		enemy.set_objective($ObjectiveA)
 
 
 #func _input(event):
