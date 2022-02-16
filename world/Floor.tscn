@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://world/Floor.tres" type="TileSet" id=1]
-[ext_resource path="res://units/BaseUnit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world/Floor.gd" type="Script" id=4]
 
 [node name="Floor" type="Node2D"]
@@ -16,21 +15,7 @@ tile_data = PoolIntArray( 458750, 2, 0, 458751, 2, 0, 393236, 2, 0, 393237, 2, 0
 
 [node name="Units" type="Node2D" parent="."]
 
-[node name="BasicUnit" parent="Units" instance=ExtResource( 2 )]
-position = Vector2( 75, 149 )
-
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="BasicUnit" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 250, 149 )
-collision_layer = 8
-collision_mask = 5
-
-[node name="RayCastRight" parent="Enemies/BasicUnit" index="4"]
-collision_mask = 4
-
-[node name="RayCastLeft" parent="Enemies/BasicUnit" index="5"]
-collision_mask = 4
 
 [node name="ObjectiveA" type="Node2D" parent="."]
 position = Vector2( 25, 0 )
@@ -38,5 +23,37 @@ position = Vector2( 25, 0 )
 [node name="ObjectiveB" type="Node2D" parent="."]
 position = Vector2( 305, 0 )
 
-[editable path="Units/BasicUnit"]
-[editable path="Enemies/BasicUnit"]
+[node name="PauseButton" type="Button" parent="."]
+pause_mode = 2
+margin_left = 129.0
+margin_top = 12.0
+margin_right = 185.0
+margin_bottom = 32.0
+text = "PAUSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UnitButton" type="Button" parent="."]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 56.0
+margin_bottom = 24.0
+text = "+ Unit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyButton" type="Button" parent="."]
+margin_left = 249.0
+margin_top = 4.0
+margin_right = 316.0
+margin_bottom = 24.0
+text = "+ Enemy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="PauseButton" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="UnitButton" to="." method="_on_UnitButton_button_down"]
+[connection signal="button_down" from="EnemyButton" to="." method="_on_EnemyButton_button_down"]

@@ -142,6 +142,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 2 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HiiboxPivot/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=22]
 resource_name = "walk_left"
@@ -158,6 +170,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 10, 11, 12, 13, 14 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HiiboxPivot/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=23]
 resource_name = "walk_right"
@@ -173,6 +197,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 15, 16, 17, 18, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HiiboxPivot/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -214,7 +250,7 @@ one_shot = true
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 60, 0 )
+cast_to = Vector2( 45, 0 )
 collision_mask = 8
 script = ExtResource( 3 )
 __meta__ = {
@@ -223,7 +259,7 @@ __meta__ = {
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( -60, 0 )
+cast_to = Vector2( -45, 0 )
 collision_mask = 8
 script = ExtResource( 4 )
 __meta__ = {
@@ -233,6 +269,7 @@ __meta__ = {
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+light_mask = 8
 position = Vector2( 0, -1 )
 shape = SubResource( 16 )
 
@@ -242,6 +279,7 @@ scale = Vector2( -1, 1 )
 [node name="Hitbox" type="Area2D" parent="HiiboxPivot"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HiiboxPivot/Hitbox"]
+light_mask = 0
 position = Vector2( 6, 3 )
 rotation = 1.5708
 shape = SubResource( 17 )
@@ -249,3 +287,4 @@ shape = SubResource( 17 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="enemy_detected" from="RayCastRight" to="." method="_on_RayCastRight_enemy_detected"]
 [connection signal="enemy_detected" from="RayCastLeft" to="." method="_on_RayCastLeft_enemy_detected"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

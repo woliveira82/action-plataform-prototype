@@ -1,16 +1,18 @@
 extends Node2D
 
-onready var unit_list = $Units.get_children()
-onready var enemy_list = $Enemies.get_children()
-onready var Player = $Player
+const BaseUnit = preload("res://units/BaseUnit.tscn")
+onready var unit_list = $Units
+onready var enemy_list = $Enemies
+#onready var Player = $Player
 
 
 func _ready():
+	print(pause_mode)
 	randomize()
-	for unit in unit_list:
+	for unit in unit_list.get_children():
 		unit.set_objective($ObjectiveB)
 	
-	for enemy in enemy_list:
+	for enemy in enemy_list.get_children():
 		enemy.set_objective($ObjectiveA)
 
 
@@ -24,3 +26,21 @@ func _ready():
 #	elif event.is_action_pressed('following'):
 #		for unit in unit_list:
 #			unit.set_following(Player)
+
+
+func _on_Button_button_down():
+	get_tree().paused = not get_tree().paused
+
+
+func _on_UnitButton_button_down():
+	var unity = BaseUnit.instance()
+	unity.set_team('player', $ObjectiveB)
+	unit_list.add_child(unity)
+	
+
+
+func _on_EnemyButton_button_down():
+	var unity = BaseUnit.instance()
+	unity.set_team('enemy', $ObjectiveA)
+	enemy_list.add_child(unity)
+
