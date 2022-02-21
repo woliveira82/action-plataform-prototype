@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+const blue_knight = preload("res://assets/blueknight.png")
+const red_knight = preload("res://assets/redknight.png")
+const gold_knight = preload("res://assets/goldknight.png")
 onready var AnimationPlayer = $AnimationPlayer
 onready var Timer = $Timer
 
@@ -22,26 +25,27 @@ var _enemy = null
 
 
 func _ready():
-	position.y = 150
-	$HiiboxPivot/Hitbox/CollisionShape2D.disabled = true
+	position.y = 100
+	$Hitbox/CollisionShape2D.disabled = true
 
 
 func set_team(team, objective):
 	if team == 'player':
 		collision_layer = 4
 		collision_mask = 9
-		$HiiboxPivot/Hitbox.collision_layer = 4
-		$HiiboxPivot/Hitbox.collision_mask = 8
+		$Hitbox.collision_layer = 4
+		$Hitbox.collision_mask = 8
 		$Hurtbox.collision_layer = 4
 		$Hurtbox.collision_mask = 8
 		position.x = 75
 		$RayCastLeft.collision_mask = 8
 		$RayCastRight.collision_mask = 8
+		$Sprite.texture = blue_knight
 	else:
 		collision_layer = 8
 		collision_mask = 5
-		$HiiboxPivot/Hitbox.collision_layer = 8
-		$HiiboxPivot/Hitbox.collision_mask = 4
+		$Hitbox.collision_layer = 8
+		$Hitbox.collision_mask = 4
 		$Hurtbox.collision_layer = 8
 		$Hurtbox.collision_mask = 4
 		position.x = 250

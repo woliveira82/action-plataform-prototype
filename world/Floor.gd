@@ -16,18 +16,6 @@ func _ready():
 		enemy.set_objective($ObjectiveA)
 
 
-#func _input(event):
-#	if event.is_action_pressed("rest"):
-#		for unit in unit_list:
-#			unit.set_idle()
-#	elif event.is_action_pressed("advance"):
-#		for unit in unit_list:
-#			unit.set_walking()
-#	elif event.is_action_pressed('following'):
-#		for unit in unit_list:
-#			unit.set_following(Player)
-
-
 func _on_Button_button_down():
 	get_tree().paused = not get_tree().paused
 
@@ -36,7 +24,6 @@ func _on_UnitButton_button_down():
 	var unity = BaseUnit.instance()
 	unity.set_team('player', $ObjectiveB)
 	unit_list.add_child(unity)
-	
 
 
 func _on_EnemyButton_button_down():

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 4.0
+height = 12.0
+
+[node name="Hitbox" type="Area2D"]
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2( 6, 3 )
+rotation = 1.5708
+shape = SubResource( 17 )
+disabled = true
