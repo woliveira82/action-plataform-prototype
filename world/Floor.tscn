@@ -1093,14 +1093,8 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 159, 133 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
+position = Vector2( 161, 129 )
 
 [connection signal="button_down" from="PauseButton" to="." method="_on_Button_button_down"]
 [connection signal="button_down" from="UnitButton" to="." method="_on_UnitButton_button_down"]
 [connection signal="button_down" from="EnemyButton" to="." method="_on_EnemyButton_button_down"]
-
-[editable path="Player"]
-[editable path="Player/UnitSprite"]
