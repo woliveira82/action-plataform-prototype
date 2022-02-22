@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var AnimationPlayer = $AnimationPlayer
+onready var Camera = $Camera2D
 
 var velocity = Vector2.ZERO
 var walking_speed = 150
@@ -19,6 +20,7 @@ func _physics_process(delta):
 			_move_state()
 		ATTACK:
 			_attack_state()
+	Camera.position.x = 40 if face_right else -40
 
 
 func _move_state():
