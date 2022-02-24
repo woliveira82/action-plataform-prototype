@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="CapsuleShape2D" id=16]
-radius = 4.0
+radius = 8.0
 height = 14.0
 
 [node name="Hurtbox" type="Area2D"]
