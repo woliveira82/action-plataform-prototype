@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://CanvasLayer.gd" type="Script" id=1]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_enable = true
+script = ExtResource( 1 )
+
+[node name="PauseButton" type="Button" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 131.0
+margin_top = 76.0
+margin_right = -133.0
+margin_bottom = -84.0
+text = "PAUSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UnitButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -44.0
+margin_top = -7.0
+margin_right = -313.0
+margin_bottom = -167.0
+text = "+ Unit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyButton" type="Button" parent="."]
+margin_left = 249.0
+margin_top = 156.0
+margin_right = 316.0
+margin_bottom = 176.0
+text = "+ Enemy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]

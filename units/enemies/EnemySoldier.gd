@@ -13,11 +13,25 @@ enum {
 	FIGHTING
 }
 export var state = IDLE
+enum {
+	WAIT,
+	ATTACK,
+	ADVANCE,
+	RETREAT,
+	ADJUST
+}
+var fighting_state = WAIT
 var next_state = null
 var face_right = true
 
 var _objective = null
 var _enemy = true
+
+
+func _ready():
+	$Sprite.scale = Vector2.ONE
+	$Sprite.position = Vector2.ZERO
+	$CollisionShape2D.disabled = false
 
 
 func _physics_process(delta):
@@ -58,24 +72,50 @@ func _state_walking():
 	if _is_near(_objective):
 		_objective = null
 
-enum {
-	ATTACK,
-	ADVANCE,
-	RETREAT,
-	ADJUST
-}
+
 func _state_fighting():
 	face_right = _set_face_right(_enemy)
-	var distance = abs(position.x - _enemy.position.x)
-	
-	velocity.x = jump_speed if face_right else -jump_speed
-	AnimationPlayer.play("jump_forward_left")
-#	AnimationPlayer.play("attack_left")
-#	if distance > 40:
-#	elif distance < 40:
-#		pass # atacar e recuar
-#	elif distance > 60:
-#		pass #idle
+	match fighting_state:
+		WAIT:
+			velocity.x = 0
+			var distance = abs(position.x - _enemy.position.x)
+			if distance > 60:
+				state = IDLE
+			elif distance > 40:
+				fighting_state = ADVANCE
+			elif distance < 25:
+				fighting_state = RETREAT
+			elif distance > 30 and distance < 35:
+				fighting_state = ATTACK
+			else:
+				fighting_state = ADJUST
+		ATTACK:
+			velocity.x = 0
+			if face_right:
+				AnimationPlayer.play("attack_right")
+			else:
+				AnimationPlayer.play("attack_left")
+		ADVANCE:
+			velocity.x = jump_speed if face_right else -jump_speed
+			if face_right:
+				AnimationPlayer.play("jump_right")
+			else:
+				AnimationPlayer.play("jump_left")
+		RETREAT:
+			velocity.x = -jump_speed if face_right else jump_speed
+			if face_right:
+				AnimationPlayer.play("attack_right")
+			else:
+				AnimationPlayer.play("attack_left")
+		ADJUST:
+			velocity.x = 0
+			if face_right:
+				pass
+				_set_wait()
+
+
+func _set_wait():
+	fighting_state = WAIT
 
 
 func _set_walking():
