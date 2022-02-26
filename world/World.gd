@@ -1,8 +1,6 @@
 extends Node2D
 
 const Enemy = preload("res://units/enemies/EnemySoldier.tscn")
-onready var unit_list = $Units
-onready var enemy_list = $Enemies
 onready var RightEnemyDoor = $RightEnemyDoor
 onready var LeftEnemyDoor = $LeftEnemyDoor
 onready var PlayerDoor = $PlayerDoor

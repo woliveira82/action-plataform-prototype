@@ -5,7 +5,7 @@ onready var Timer = $Timer
 
 export var velocity = Vector2.ZERO
 var walking_speed = 1200
-var jump_speed = 1800
+var jump_speed = 2400
 var life = 2
 enum {
 	IDLE,
@@ -49,7 +49,6 @@ func _physics_process(delta):
 				state = IDLE
 				continue
 			_state_fighting()
-	print(velocity.x)
 	velocity = move_and_slide(velocity * delta)
 
 
@@ -108,10 +107,8 @@ func _state_fighting():
 			else:
 				AnimationPlayer.play("attack_left")
 		ADJUST:
-			velocity.x = 0
-			if face_right:
-				pass
-				_set_wait()
+			velocity.x = walking_speed if face_right else -walking_speed
+			_set_wait()
 
 
 func _set_wait():
@@ -132,6 +129,7 @@ func _set_idle():
 
 func _set_fighting():
 	if next_state == null:
+		fighting_state = WAIT
 		next_state = FIGHTING
 		Timer.start(rand_range(0.2, 0.6))
 

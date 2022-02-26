@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://units/common/Hitbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://units/common/Hurtbox.tscn" type="PackedScene" id=2]
@@ -422,9 +422,25 @@ tracks/5/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
 [sub_resource type="Animation" id=10]
 resource_name = "jump_left"
-length = 0.8
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:flip_h")
 tracks/0/interp = 1
@@ -444,7 +460,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.8 ),
+"times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -478,7 +494,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "jump_right"
-length = 0.8
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:flip_h")
 tracks/0/interp = 1
@@ -498,7 +514,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.8 ),
+"times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -641,6 +657,7 @@ anims/attack_left = SubResource( 3 )
 anims/attack_right = SubResource( 7 )
 anims/dying_left = SubResource( 8 )
 anims/dying_right = SubResource( 12 )
+anims/idle = SubResource( 13 )
 anims/jump_left = SubResource( 10 )
 anims/jump_right = SubResource( 11 )
 anims/walk_left = SubResource( 5 )
