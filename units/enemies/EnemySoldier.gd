@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var AnimationPlayer = $AnimationPlayer
 onready var Timer = $Timer
+onready var Text = $RichTextLabel
 
 export var velocity = Vector2.ZERO
 var walking_speed = 1200
@@ -26,6 +27,7 @@ var face_right = true
 
 var _objective = null
 var _enemy = true
+var _enemy_distance = 0.0
 
 
 func _ready():
@@ -77,14 +79,14 @@ func _state_fighting():
 	match fighting_state:
 		WAIT:
 			velocity.x = 0
-			var distance = abs(position.x - _enemy.position.x)
+			var distance = abs(position.x - _enemy.position.x) - _enemy_distance
 			if distance > 60:
 				state = IDLE
 			elif distance > 40:
 				fighting_state = ADVANCE
-			elif distance < 25:
+			elif distance < 20:
 				fighting_state = RETREAT
-			elif distance > 30 and distance < 35:
+			elif distance > 25 and distance < 35:
 				fighting_state = ATTACK
 			else:
 				fighting_state = ADJUST
@@ -149,14 +151,18 @@ func set_objective(objective):
 	state = WALKING
 
 
-func _on_RayCastRight_enemy_detected(enemy):
-	_set_fighting()
-	_enemy = enemy
+func _on_RayCastRight_enemy_detected(enemy, distance):
+	_enemy_detected(enemy, distance)
 
 
-func _on_RayCastLeft_enemy_detected(enemy):
+func _on_RayCastLeft_enemy_detected(enemy, distance):
+	_enemy_detected(enemy, distance)
+
+
+func _enemy_detected(enemy, distance):
 	_set_fighting()
 	_enemy = enemy
+	_enemy_distance = distance
 
 
 func _on_Timer_timeout():
@@ -166,7 +172,7 @@ func _on_Timer_timeout():
 
 func _on_Hurtbox_area_entered(area):
 	life -= 1
-	modulate = Color(1, 0.5, 0.5, 1)
+	Text.text = str(life)
 	if area.global_position.x > global_position.x:
 		global_position.x -= 10
 	else:

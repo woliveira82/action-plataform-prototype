@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var AnimationPlayer = $AnimationPlayer
 onready var Camera = $Camera2D
+onready var Text = $RichTextLabel
 
 var velocity = Vector2.ZERO
 var walking_speed = 150
@@ -54,3 +55,14 @@ func _attack_state():
 
 func _on_attack_fineshed():
 	state = WALK
+
+
+func damage_life(value):
+	life -= value
+	Text.text = str(life)
+	if life <= 0:
+		queue_free()
+
+
+func _on_Hurtbox_area_entered(area):
+	damage_life(1)
